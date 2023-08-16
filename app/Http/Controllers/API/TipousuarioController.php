@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categoria;
+use App\Models\Tipousuario;
 use Illuminate\Http\Request;
-use App\Http\Resources\CategoriaResource;
+use App\Http\Resources\TipousuarioResource;
 
-class CategoriaController extends Controller
+class TipousuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $lista = CategoriaResource::collection((Categoria::latest()->paginate()));
+        $lista = TipousuarioResource::collection((Tipousuario::latest()->paginate()));
         return response()->json([
             'status' => true,
             'data' => $lista
@@ -31,10 +31,10 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $obj = Categoria::create($request->all());
+        $obj = Tipousuario::create($request->all());
         return response()->json([
             'status' => true,
-            'message' => "Categoria creada correctamente",
+            'message' => "Tipo usuario creado correctamente",
             'data' => $obj
         ],200);
     }
@@ -42,29 +42,29 @@ class CategoriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Tipousuario  $tipousuario
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $obj = Categoria::find($id);
-        return new CategoriaResource($obj);
+        $obj = Tipousuario::find($id);
+        return new TipousuarioResource($obj);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Tipousuario  $tipousuario
      * @return \Illuminate\Http\Response
      */
     public function update($id,Request $request)
     {
-        $obj = Categoria::find($id);
+        $obj = Tipousuario::find($id);
         $obj->update($request->all());
         return response()->json([
             'status' => true,
-            'message' => "Categoria actualizada correctamente",
+            'message' => "Tipo de usuario actualizado correctamente",
             'data' => $obj
         ],200);
     }
@@ -72,12 +72,12 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\Tipousuario  $tipousuario
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $obj = Categoria::find($id);
+        $obj = Tipousuario::find($id);
         if(!empty($obj)){
             $obj->delete();
             return response()->json([

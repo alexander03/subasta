@@ -26,6 +26,7 @@ class User extends Authenticatable
         'direccion',
         'email',
         'password',
+        'tipousuario_id'
     ];
 
     /**
@@ -46,4 +47,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tipousuario()
+    {
+        return $this->hasOne(Tipousuario::class,'id');
+    }
 }
