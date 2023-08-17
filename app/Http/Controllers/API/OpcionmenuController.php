@@ -17,10 +17,7 @@ class OpcionmenuController extends Controller
     public function index()
     {
         $lista = OpcionmenuResource::collection((Opcionmenu::latest()->paginate()));
-        return response()->json([
-            'status' => true,
-            'data' => $lista
-        ]);
+        return response()->json($lista);
     }
 
     /**
@@ -32,11 +29,7 @@ class OpcionmenuController extends Controller
     public function store(Request $request)
     {
         $obj = Opcionmenu::create($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Opcion menu creado correctamente",
-            'data' => $obj
-        ],200);
+        return response()->json($obj);
     }
 
     /**
@@ -62,11 +55,7 @@ class OpcionmenuController extends Controller
     {
         $obj = Opcionmenu::find($id);
         $obj->update($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Opcion Menu actualizado correctamente",
-            'data' => $obj
-        ],200);
+        return response()->json($obj);
     }
 
     /**
@@ -80,15 +69,9 @@ class OpcionmenuController extends Controller
         $obj = Opcionmenu::find($id);
         if(!empty($obj)){
             $obj->delete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Eliminado correctamente'
-            ],200);
+            return response()->json('Eliminado correctamente');
         }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'No encontrado'
-        ],404);
+        return response()->json('No encontrado');
     }
 }

@@ -17,10 +17,7 @@ class TipousuarioController extends Controller
     public function index()
     {
         $lista = TipousuarioResource::collection((Tipousuario::latest()->paginate()));
-        return response()->json([
-            'status' => true,
-            'data' => $lista
-        ]);
+        return response()->json($lista);
     }
 
     /**
@@ -32,11 +29,7 @@ class TipousuarioController extends Controller
     public function store(Request $request)
     {
         $obj = Tipousuario::create($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Tipo usuario creado correctamente",
-            'data' => $obj
-        ],200);
+        return response()->json($obj);
     }
 
     /**
@@ -62,11 +55,7 @@ class TipousuarioController extends Controller
     {
         $obj = Tipousuario::find($id);
         $obj->update($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Tipo de usuario actualizado correctamente",
-            'data' => $obj
-        ],200);
+        return response()->json($obj);
     }
 
     /**
@@ -80,15 +69,9 @@ class TipousuarioController extends Controller
         $obj = Tipousuario::find($id);
         if(!empty($obj)){
             $obj->delete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Eliminado correctamente'
-            ],200);
+            return response()->json('Eliminado correctamente');
         }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'No encontrado'
-        ],404);
+        return response()->json('No encontrado');
     }
 }

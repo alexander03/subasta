@@ -17,10 +17,7 @@ class GrupomenuController extends Controller
     public function index()
     {
         $lista = GrupomenuResource::collection((Grupomenu::latest()->paginate()));
-        return response()->json([
-            'status' => true,
-            'data' => $lista
-        ]);
+        return response()->json($lista);
     }
 
     /**
@@ -32,11 +29,7 @@ class GrupomenuController extends Controller
     public function store(Request $request)
     {
         $obj = Grupomenu::create($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Grupo Menu creada correctamente",
-            'data' => $obj
-        ],200);
+        return response()->json($obj);
     }
 
     /**
@@ -61,12 +54,7 @@ class GrupomenuController extends Controller
     public function update($id,Request $request)
     {
         $obj = Grupomenu::find($id);
-        $obj->update($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Grupo Menu actualizada correctamente",
-            'data' => $obj
-        ],200);
+        return response()->json($obj);
     }
 
     /**
@@ -80,15 +68,9 @@ class GrupomenuController extends Controller
         $obj = Grupomenu::find($id);
         if(!empty($obj)){
             $obj->delete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Eliminado correctamente'
-            ],200);
+            return response()->json('Eliminado correctamente');
         }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'No encontrado'
-        ],404);
+        return response()->json('No encontrado');
     }
 }

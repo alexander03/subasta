@@ -32,10 +32,7 @@ class LoginController extends Controller
             ]);
         }
         
-        return response()->json([
-            'status' => true,
-            'message' => 'Unauthenticated'
-        ],401);
+        return response()->json('Unauthenticated');
     }
 
     public function validateLogin(Request $request)
@@ -50,10 +47,7 @@ class LoginController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Sesion cerrada correctamente',
-        ]);
+        return response()->json('Sesion cerrada correctamente');
     }
 
     public function authenticate(Request $request){

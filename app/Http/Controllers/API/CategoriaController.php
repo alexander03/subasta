@@ -17,10 +17,7 @@ class CategoriaController extends Controller
     public function index(Request $request)
     {
         $lista = CategoriaResource::collection((Categoria::latest()->paginate()));
-        return response()->json([
-            'status' => true,
-            'data' => $lista
-        ]);
+        return response()->json($lista);
     }
 
     /**
@@ -32,11 +29,7 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $obj = Categoria::create($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Categoria creada correctamente",
-            'data' => $obj
-        ],200);
+        return response()->json($obj);
     }
 
     /**
@@ -62,11 +55,7 @@ class CategoriaController extends Controller
     {
         $obj = Categoria::find($id);
         $obj->update($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Categoria actualizada correctamente",
-            'data' => $obj
-        ],200);
+        return response()->json($obj);
     }
 
     /**
@@ -80,15 +69,9 @@ class CategoriaController extends Controller
         $obj = Categoria::find($id);
         if(!empty($obj)){
             $obj->delete();
-            return response()->json([
-                'status' => true,
-                'message' => 'Eliminado correctamente'
-            ],200);
+            return response()->json('Eliminado correctamente');
         }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'No encontrado'
-        ],404);
+        return response()->json('No encontrado');
     }
 }
