@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\TipousuarioController;
 use App\Http\Controllers\Api\ProductoController;
+use App\Http\Controllers\Api\GrupomenuController;
+use App\Http\Controllers\Api\OpcionmenuController;
+use App\Http\Controllers\Api\AccesoController;
 use App\Http\Controllers\Api\LoginController;
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +32,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('categoria', CategoriaController::class);
     Route::apiResource('tipousuario', TipousuarioController::class);
     Route::apiResource('producto', ProductoController::class);
+    Route::apiResource('grupomenu', GrupomenuController::class);
+    Route::apiResource('opcionmenu', OpcionmenuController::class);
+    Route::apiResource('acceso', AccesoController::class);
     Route::post('logout', [LoginController::class, 'logout']);
 });

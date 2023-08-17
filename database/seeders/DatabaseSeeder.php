@@ -15,5 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(1)->create();
         $this->call(TipousuarioSeeder::class);
+        $this->call(GrupomenuSeeder::class);
+        $this->call(OpcionmenuSeeder::class);
+        $this->call(AccesoSeeder::class);
     }
 }
