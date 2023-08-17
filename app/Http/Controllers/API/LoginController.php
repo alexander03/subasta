@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Acceso;
 use App\Http\Resources\TipousuarioResource;
+use App\Http\Resources\AccesoResource;
 
 class LoginController extends Controller
 {
@@ -19,6 +21,9 @@ class LoginController extends Controller
             //$data = Auth::login($request->user(), true);
             $user = $request->user();
             $user->tipousuario = new TipousuarioResource($user->tipousuario);
+            $accesos = Acceso::getByTipousuario($user->tipousuario_id)->get();
+            $lista = AccesoResource::collection($accesos);
+            $user->accesos = $lista;
             return response()->json([
                 'status' => true,
                 'token' => $request->user()->createToken($request->email)->plainTextToken,
@@ -54,6 +59,9 @@ class LoginController extends Controller
     public function authenticate(Request $request){
         $user = $request->user();
         $user->tipousuario = new TipousuarioResource($user->tipousuario);
+        $accesos = Acceso::getByTipousuario($user->tipousuario_id)->get();
+        $lista = AccesoResource::collection($accesos);
+        $user->accesos = $lista;
         return response()->json($user);
     }
 

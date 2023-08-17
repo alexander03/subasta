@@ -10,7 +10,8 @@ class Acceso extends Model
     use HasFactory;
     protected $fillable = [
         'opcionmenu_id',
-        'tipousuario_id'
+        'tipousuario_id',
+        'id'
     ];
 
     public function opcionmenu()
@@ -21,5 +22,14 @@ class Acceso extends Model
     public function tipousuario()
     {
         return $this->hasOne(Tipousuario::class,'id','tipousuario_id');
+    }
+
+    public function scopeGetByTipousuario($query,$tipousuario_id) {
+        return $query->join('opcionmenus','opcionmenus.id','=','accesos.opcionmenu_id')
+            ->join('grupomenus','grupomenus.id','=','opcionmenus.grupomenu_id')
+            ->where('tipousuario_id', '=', $tipousuario_id)
+            ->orderBy('grupomenus.orden','asc')
+            ->orderBy('opcionmenus.orden','asc')
+            ->select('accesos.*');
     }
 }

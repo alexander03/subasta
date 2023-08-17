@@ -16,7 +16,6 @@ class AccesoResource extends JsonResource
      */
     public function toArray($request)
     {
-
         //return parent::toArray($request);
         return ['id' => $this->id,
             'tipousuario_id' => $this->tipousuario_id,
