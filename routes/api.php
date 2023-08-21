@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\GrupomenuController;
 use App\Http\Controllers\Api\OpcionmenuController;
 use App\Http\Controllers\Api\AccesoController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\UbigeoController;
+use App\Http\Controllers\Api\UsuarioController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,4 +38,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('opcionmenu', OpcionmenuController::class);
     Route::apiResource('acceso', AccesoController::class);
     Route::post('logout', [LoginController::class, 'logout']);
+
+    Route::get('distrito',[UbigeoController::class,'distrito']);
+    Route::get('provincia',[UbigeoController::class,'provincia']);
+    Route::get('departamento',[UbigeoController::class,'departamento']);
+
+    Route::apiResource('usuario', UsuarioController::class);
 });

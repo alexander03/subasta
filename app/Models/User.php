@@ -24,6 +24,8 @@ class User extends Authenticatable
         'dni',
         'telefono',
         'direccion',
+        'distrito_id',
+        'fechanacimiento',
         'email',
         'password',
         'tipousuario_id'
@@ -48,8 +50,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function setPasswordAttribute($value) {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     public function tipousuario()
     {
-        return $this->hasOne(Tipousuario::class,'id');
+        return $this->hasOne(Tipousuario::class,'id','tipousuario_id');
+    }
+
+    public function distrito()
+    {
+        return $this->hasOne(Distrito::class,'id','distrito_id');
     }
 }

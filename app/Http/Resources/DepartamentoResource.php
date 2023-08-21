@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GrupomenuResource extends JsonResource
+class DepartamentoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,8 +14,7 @@ class GrupomenuResource extends JsonResource
      */
     public function toArray($request)
     {
-        //return parent::toArray($request);
-        return ['id' => $this->id,
-        'nombre' => $this->nombre];
+        return ["id" => $this->id,
+            "nombre" => $this->name];
     }
 }
