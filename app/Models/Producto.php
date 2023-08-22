@@ -17,6 +17,7 @@ class Producto extends Model
         'situacion',
         'categoria_id'
     ];
+    protected $with = ['categoria'];
 
     public function categoria()
     {

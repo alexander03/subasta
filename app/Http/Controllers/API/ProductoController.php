@@ -29,6 +29,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $obj = Producto::create($request->all());
+        $obj->load(['categoria']);
         return response()->json($obj);
     }
 
@@ -41,6 +42,7 @@ class ProductoController extends Controller
     public function show($id)
     {
         $obj = Producto::find($id);
+        $obj->load(['categoria']);
         return new ProductoResource($obj);
     }
 
@@ -55,6 +57,7 @@ class ProductoController extends Controller
     {
         $obj = Producto::find($id);
         $obj->update($request->all());
+        $obj->load(['categoria']);
         return response()->json($obj);
     }
 
@@ -69,7 +72,7 @@ class ProductoController extends Controller
         $obj = Producto::find($id);
         if(!empty($obj)){
             $obj->delete();
-            return response()->json('Eliminado correctamente');
+            return response()->json($obj);
         }
 
         return response()->json('No encontrado');
