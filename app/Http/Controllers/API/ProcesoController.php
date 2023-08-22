@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tipousuario;
-use App\Models\Acceso;
+use App\Models\Proceso;
+use App\Http\Resources\ProcesoResource;
 use Illuminate\Http\Request;
-use App\Http\Resources\TipousuarioResource;
 
-class TipousuarioController extends Controller
+class ProcesoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class TipousuarioController extends Controller
      */
     public function index()
     {
-        $lista = TipousuarioResource::collection((Tipousuario::latest()->paginate()));
+        $lista = ProcesoResource::collection((Proceso::latest()->paginate()));
         return response()->json($lista);
     }
 
@@ -29,32 +28,32 @@ class TipousuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $obj = Tipousuario::create($request->all());
+        $obj = Proceso::create($request->all());
         return response()->json($obj);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tipousuario  $tipousuario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $obj = Tipousuario::find($id);
-        return new TipousuarioResource($obj);
+        $obj = Proceso::find($id);
+        return new ProcesoResource($obj);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tipousuario  $tipousuario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id,Request $request)
+    public function update(Request $request, $id)
     {
-        $obj = Tipousuario::find($id);
+        $obj = Proceso::find($id);
         $obj->update($request->all());
         return response()->json($obj);
     }
@@ -62,36 +61,17 @@ class TipousuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tipousuario  $tipousuario
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $obj = Tipousuario::find($id);
+        $obj = Proceso::find($id);
         if(!empty($obj)){
             $obj->delete();
             return response()->json('Eliminado correctamente');
         }
 
         return response()->json('No encontrado');
-    }
-
-    public function acceso(Request $request)
-    {
-        $obj = Tipousuario::find($request->input('id'));
-        $lista = Acceso::where('tipousuario_id','=',$obj->id)->get();
-        if(count($lista)>0){
-            foreach($lista as $k){
-                $k->delete();
-            }
-        }
-        $accesos = json_decode($request->input('accesos'));
-        foreach($accesos as $k){
-            $acceso = new Acceso();
-            $acceso->tipousuario_id = $obj->id;
-            $acceso->opcionmenu_id = $k;
-            $acceso->save();
-        }
-        return response()->json($obj);
     }
 }
