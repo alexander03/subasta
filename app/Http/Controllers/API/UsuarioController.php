@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DepartamentoResource;
+use App\Http\Resources\DistritoResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UsuarioResource;
@@ -29,6 +31,7 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $obj = User::create($request->all());
+        $obj = new UsuarioResource($obj);
         return response()->json($obj);
     }
 
@@ -55,6 +58,7 @@ class UsuarioController extends Controller
     {
         $obj = User::find($id);
         $obj->update($request->all());
+        $obj = new UsuarioResource($obj);
         return response()->json($obj);
     }
 
@@ -69,7 +73,7 @@ class UsuarioController extends Controller
         $obj = User::find($id);
         if(!empty($obj)){
             $obj->delete();
-            return response()->json('Eliminado correctamente');
+            return response()->json($obj);
         }
 
         return response()->json('No encontrado');

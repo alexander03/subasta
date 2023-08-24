@@ -39,9 +39,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('acceso', AccesoController::class);
     Route::post('logout', [LoginController::class, 'logout']);
 
-    Route::get('distrito',[UbigeoController::class,'distrito']);
-    Route::get('provincia',[UbigeoController::class,'provincia']);
-    Route::get('departamento',[UbigeoController::class,'departamento']);
-
-    Route::apiResource('usuario', UsuarioController::class);
 });
+Route::apiResource('usuario', UsuarioController::class);
+Route::get('distrito',[UbigeoController::class,'distrito']);
+Route::get('provincia',[UbigeoController::class,'provincia']);
+Route::get('departamento',[UbigeoController::class,'departamento']);

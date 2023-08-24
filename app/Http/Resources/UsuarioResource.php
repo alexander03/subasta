@@ -22,7 +22,7 @@ class UsuarioResource extends JsonResource
             'telefono' => $this->telefono,
             'direccion' => $this->direccion,
             'distrito_id' => $this->distrito_id,
-            'fechanacimiento' => $this->fechanacmiento,
+            'fechanacimiento' => $this->fechanacimiento,
             'email' => $this->email,
             'password' => $this->password,
             'tipousuario_id' => $this->tipousuario_id,
