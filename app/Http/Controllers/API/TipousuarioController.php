@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tipousuario;
+use App\Models\Acceso;
 use Illuminate\Http\Request;
 use App\Http\Resources\TipousuarioResource;
 
@@ -73,5 +74,24 @@ class TipousuarioController extends Controller
         }
 
         return response()->json('No encontrado');
+    }
+
+    public function acceso(Request $request)
+    {
+        $obj = Tipousuario::find($request->input('id'));
+        $lista = Acceso::where('tipousuario_id','=',$obj->id)->get();
+        if(count($lista)>0){
+            foreach($lista as $k){
+                $k->delete();
+            }
+        }
+        $accesos = json_decode($request->input('accesos'));
+        foreach($accesos as $k){
+            $acceso = new Acceso();
+            $acceso->tipousuario_id = $obj->id;
+            $acceso->opcionmenu_id = $k;
+            $acceso->save();
+        }
+        return response()->json($obj);
     }
 }

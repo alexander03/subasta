@@ -11,6 +11,9 @@ use App\Http\Controllers\Api\AccesoController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\UbigeoController;
 use App\Http\Controllers\Api\UsuarioController;
+use App\Http\Controllers\Api\ProcesoController;
+use App\Http\Controllers\Api\BienController;
+use App\Http\Controllers\Api\EtapaController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,10 +40,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('grupomenu', GrupomenuController::class);
     Route::apiResource('opcionmenu', OpcionmenuController::class);
     Route::apiResource('acceso', AccesoController::class);
+    Route::post('tipousuario/acceso',[TipousuarioController::class,'acceso']);
     Route::post('logout', [LoginController::class, 'logout']);
 
+    Route::apiResource('proceso', ProcesoController::class);
+    Route::apiResource('bien', BienController::class);
+    Route::apiResource('etapa', EtapaController::class);
 });
-Route::apiResource('usuario', UsuarioController::class);
 Route::get('distrito',[UbigeoController::class,'distrito']);
 Route::get('provincia',[UbigeoController::class,'provincia']);
 Route::get('departamento',[UbigeoController::class,'departamento']);
+
+Route::apiResource('usuario', UsuarioController::class);
