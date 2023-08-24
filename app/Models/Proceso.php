@@ -23,4 +23,9 @@ class Proceso extends Model
     {
         return $this->hasOne(Proceso::class,'id','proceso_id');
     }
+
+    public function bienes()
+    {
+        return $this->hasMany(Bien::class,'proceso_id','id');
+    }
 }

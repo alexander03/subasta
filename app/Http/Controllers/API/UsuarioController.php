@@ -35,6 +35,13 @@ class UsuarioController extends Controller
         return response()->json($obj);
     }
 
+    public function store2(Request $request)
+    {
+        $obj = User::create($request->all());
+        $obj = new UsuarioResource($obj);
+        return response()->json($obj);
+    }
+
     /**
      * Display the specified resource.
      *

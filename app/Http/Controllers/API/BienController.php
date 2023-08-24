@@ -69,7 +69,7 @@ class BienController extends Controller
         $obj = Bien::find($id);
         if(!empty($obj)){
             $obj->delete();
-            return response()->json('Eliminado correctamente');
+            return response()->json($obj);
         }
 
         return response()->json('No encontrado');

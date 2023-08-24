@@ -43,12 +43,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('tipousuario/acceso',[TipousuarioController::class,'acceso']);
     Route::post('logout', [LoginController::class, 'logout']);
 
+    Route::apiResource('usuario', UsuarioController::class);
     Route::apiResource('proceso', ProcesoController::class);
     Route::apiResource('bien', BienController::class);
     Route::apiResource('etapa', EtapaController::class);
+    Route::post('proceso/store2', [ProcesoController::class,'store2'])->name('proceso.store2');
 });
 Route::get('distrito',[UbigeoController::class,'distrito']);
 Route::get('provincia',[UbigeoController::class,'provincia']);
 Route::get('departamento',[UbigeoController::class,'departamento']);
 
-Route::apiResource('usuario', UsuarioController::class);
+Route::get('proceso',[ProcesoController::class,'list'])->name('proceso.list');
+
+Route::post('usuario/store2', [UsuarioController::class,'store2'])->name('usuario.store2');
