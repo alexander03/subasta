@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Producto extends Model
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+class Producto extends Model implements HasMedia
 {
-    use SoftDeletes,HasFactory;
+    use SoftDeletes,HasFactory, InteractsWithMedia;
     protected $fillable = [
         'nombre',
         'descripcion',
         'valor',
-        'portada',
         'situacion',
         'categoria_id'
     ];
-    protected $with = ['categoria'];
+    protected $with = ['categoria', 'media'];
 
     public function categoria()
     {

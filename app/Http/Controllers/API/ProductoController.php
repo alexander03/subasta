@@ -28,8 +28,28 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        $obj = Producto::create($request->all());
-        $obj->load(['categoria']);
+        $data = $request->validate([
+            'categoria_id' => 'required|exists:categorias,id',
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'valor' => 'required',
+            'situacion' => 'required',
+        ]);
+
+        $obj = new Producto();
+        $obj->categoria_id = $data['categoria_id'];
+        $obj->nombre = $data['nombre'];
+        $obj->descripcion = $data['descripcion'];
+        $obj->portada = 'null';
+        $obj->valor = $data['valor'];
+        $obj->situacion = $data['situacion'];
+
+        if (isset($request['image'])) {
+            $obj->clearMediaCollection('images');
+            $obj->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+        $obj->save();
+        $obj->load(['categoria','media']);
         return response()->json($obj);
     }
 
@@ -53,11 +73,33 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update($id,Request $request)
+    public function actualizar($id,Request $request)
     {
-        $obj = Producto::find($id);
-        $obj->update($request->all());
-        $obj->load(['categoria']);
+        // $obj = Producto::find($id);
+        $obj = Producto::findOrFail($id);
+        // return response()->json($request);
+        // dd();
+
+        $data = $request->validate([
+            'categoria_id' => 'required|exists:categorias,id',
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'valor' => 'required',
+            'situacion' => 'required',
+        ]);
+        $obj->categoria_id = $data['categoria_id'];
+        $obj->nombre = $data['nombre'];
+        $obj->descripcion = $data['descripcion'];
+        $obj->portada = 'null';
+        $obj->valor = $data['valor'];
+        $obj->situacion = $data['situacion'];
+
+        if (isset($request['image'])) {
+            $obj->clearMediaCollection('images');
+            $obj->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+        $obj->save();
+        $obj->load(['categoria','media']);
         return response()->json($obj);
     }
 

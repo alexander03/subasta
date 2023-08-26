@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\CategoriaResource;
+use App\Http\Resources\MediaResource;
 
 class ProductoResource extends JsonResource
 {
@@ -24,6 +25,8 @@ class ProductoResource extends JsonResource
             'situacion' => $this->situacion,
             'categoria_id' => $this->categoria_id,
             'categoria' =>new CategoriaResource($this->categoria),
+            'media' => MediaResource::collection($this->media),
+
         ];
     }
 }

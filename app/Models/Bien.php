@@ -16,6 +16,7 @@ class Bien extends Model
         'proceso_id',
         'producto_id'
     ];
+    protected $with = ['producto'];
 
     public function proceso()
     {

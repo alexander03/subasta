@@ -25,7 +25,7 @@ class ProcesoController extends Controller
 
     public function list()
     {
-        $lista = Proceso::with('bienes')->latest()->paginate();
+        $lista = Proceso::with(['bienes', 'etapas'])->latest()->get();
         return response()->json($lista);
     }
 
@@ -59,9 +59,10 @@ class ProcesoController extends Controller
         }
         foreach ($etapas as $key => $value) {
             $input = $value;
-            $input->id=$obj->id;
+            $input->proceso_id=$obj->id;
             Etapa::create((array) $input);
         }
+        $obj->load(['bienes', 'etapas']);
         return response()->json($obj);
     }
 

@@ -37,22 +37,23 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('categoria', CategoriaController::class);
     Route::apiResource('tipousuario', TipousuarioController::class);
     Route::apiResource('producto', ProductoController::class);
+    Route::post('actualizar-producto/{producto}',[ProductoController::class,'actualizar']);
     Route::apiResource('grupomenu', GrupomenuController::class);
     Route::apiResource('opcionmenu', OpcionmenuController::class);
     Route::apiResource('acceso', AccesoController::class);
     Route::post('tipousuario/acceso',[TipousuarioController::class,'acceso']);
     Route::post('logout', [LoginController::class, 'logout']);
 
-    Route::apiResource('usuario', UsuarioController::class);
     Route::apiResource('proceso', ProcesoController::class);
     Route::apiResource('bien', BienController::class);
     Route::apiResource('etapa', EtapaController::class);
     Route::post('proceso/store2', [ProcesoController::class,'store2'])->name('proceso.store2');
 });
+Route::apiResource('usuario', UsuarioController::class);
 Route::get('distrito',[UbigeoController::class,'distrito']);
 Route::get('provincia',[UbigeoController::class,'provincia']);
 Route::get('departamento',[UbigeoController::class,'departamento']);
 
 Route::get('proceso',[ProcesoController::class,'list'])->name('proceso.list');
 
-Route::post('usuario/store2', [UsuarioController::class,'store2'])->name('usuario.store2');
+Route::post('usuario/store2', [UsuarioController::class, 'store2'])->name('usuario.store2');
