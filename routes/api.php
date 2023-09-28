@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\UsuarioController;
 use App\Http\Controllers\Api\ProcesoController;
 use App\Http\Controllers\Api\BienController;
 use App\Http\Controllers\Api\EtapaController;
+use App\Http\Controllers\Api\InscripcionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -48,6 +49,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('bien', BienController::class);
     Route::apiResource('etapa', EtapaController::class);
     Route::post('proceso/store2', [ProcesoController::class,'store2'])->name('proceso.store2');
+    Route::apiResource('inscripcion', InscripcionController::class);
 });
 Route::apiResource('usuario', UsuarioController::class);
 Route::get('distrito',[UbigeoController::class,'distrito']);
