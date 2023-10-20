@@ -11,12 +11,16 @@ class Proceso extends Model
     use SoftDeletes,HasFactory;
 
     protected $fillable = [
+        'nombre',
+        'descripcion',
         'fechainicio',
         'fechafin',
         'tipo',
         'situacion',
         'modalidad',
-        'proceso_id'
+        'proceso_id',
+        'bases',
+        'preciobase'
     ];
 
     public function proceso()

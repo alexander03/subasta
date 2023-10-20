@@ -53,6 +53,7 @@ class ProcesoController extends Controller
                 $input = array("producto_id"=>$value,
                                 "proceso_id"=>$obj->id,
                                 "situacion"=>'P',
+                                "garantia" => 0,
                                 "valorreferencia"=>$producto->valor);
                 Bien::create($input);
             }

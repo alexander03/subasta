@@ -15,11 +15,15 @@ class ProcesoResource extends JsonResource
     public function toArray($request)
     {
         return ['id' => $this->id,
+            'nombre' => $this->nombre,
+            'descripcion' => $this->descripcion,
             'fechainicio' => $this->fechainicio,
             'fechafin' => $this->fechafin,
             'tipo' => $this->tipo,
             'situacion' => $this->situacion,
             'modalidad' => $this->modalidad,
+            'bases' => $this->bases,
+            'preciobase' => $this->preciobase,
             'proceso_id' => $this->proceso_id,
             'proceso' =>new ProcesoResource($this->proceso),
         ];

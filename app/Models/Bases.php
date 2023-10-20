@@ -6,26 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Bien extends Model
+class Bases extends Model
 {
-    use SoftDeletes,HasFactory;
+    use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'situacion',
-        'valorreferencia',
         'proceso_id',
-        'garantia',
-        'producto_id'
+        'situacion',
+        'comentario',
+        'usuario_id'
     ];
-    protected $with = ['producto'];
 
     public function proceso()
     {
         return $this->hasOne(Proceso::class,'id','proceso_id');
     }
 
-    public function producto()
+    public function usuario()
     {
-        return $this->hasOne(Producto::class,'id','producto_id');
+        return $this->hasOne(User::class,'id','usuario_id');
     }
 }
