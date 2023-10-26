@@ -48,12 +48,12 @@ class ProcesoController extends Controller
         $etapas = $data->stages;
         $obj = Proceso::create((array) $data->process);
         foreach ($bienes as $key => $value) {
-            $producto = Producto::find($value);
+            $producto = Producto::find($value->id);
             if(!is_null($producto)){
-                $input = array("producto_id"=>$value,
+                $input = array("producto_id"=>$value->id,
                                 "proceso_id"=>$obj->id,
                                 "situacion"=>'P',
-                                "garantia" => 0,
+                                "garantia" => $value->garantia,
                                 "valorreferencia"=>$producto->valor);
                 Bien::create($input);
             }
