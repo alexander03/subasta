@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('etapa', EtapaController::class);
     Route::post('proceso/store2', [ProcesoController::class,'store2'])->name('proceso.store2');
     Route::apiResource('inscripcion', InscripcionController::class);
+    Route::post('actualizar-inscripcion/{id}',[InscripcionController::class,'actualizar']);
     Route::apiResource('bases', BasesController::class);
 });
 Route::apiResource('usuario', UsuarioController::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\MediaResource;
 
 class InscripcionResource extends JsonResource
 {
@@ -26,6 +27,7 @@ class InscripcionResource extends JsonResource
             'etapa' => new EtapaResource($this->etapa),
             'usuario_id' => $this->usuario_id,
             'usuario' => new UsuarioResource($this->usuario),
+            'media' => MediaResource::collection($this->media),
         ];
     }
 }

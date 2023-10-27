@@ -20,7 +20,8 @@ class Proceso extends Model
         'modalidad',
         'proceso_id',
         'bases',
-        'preciobase'
+        'preciobase',
+        'tiempo'
     ];
 
     public function proceso()

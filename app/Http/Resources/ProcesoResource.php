@@ -26,6 +26,7 @@ class ProcesoResource extends JsonResource
             'preciobase' => $this->preciobase,
             'proceso_id' => $this->proceso_id,
             'proceso' =>new ProcesoResource($this->proceso),
+            'tiempo' => $this->tiempo,
         ];
     }
 }

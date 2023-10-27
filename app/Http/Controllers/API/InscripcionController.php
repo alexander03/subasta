@@ -39,6 +39,14 @@ class InscripcionController extends Controller
     public function store(Request $request)
     {
         $obj = Inscripcion::create($request->all());
+        if (isset($request['image'])) {
+            $obj->clearMediaCollection('images');
+            $obj->addMediaFromRequest('image')->toMediaCollection('images');
+            $obj->save();
+        }
+
+        $obj->load(['media']);
+
         return response()->json($obj);
     }
 
@@ -61,10 +69,19 @@ class InscripcionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function actualizar($id,Request $request)
     {
         $obj = Inscripcion::find($id);
         $obj->update($request->all());
+
+        if (isset($request['image'])) {
+            $obj->clearMediaCollection('images');
+            $obj->addMediaFromRequest('image')->toMediaCollection('images');
+            $obj->save();
+        }
+
+        $obj->load(['media']);
+
         return response()->json($obj);
     }
 
