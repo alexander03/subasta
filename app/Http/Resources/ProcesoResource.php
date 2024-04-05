@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\MediaResource;
 
 class ProcesoResource extends JsonResource
 {
@@ -27,6 +28,7 @@ class ProcesoResource extends JsonResource
             'proceso_id' => $this->proceso_id,
             'proceso' =>new ProcesoResource($this->proceso),
             'tiempo' => $this->tiempo,
+            'media' => MediaResource::collection($this->media),
         ];
     }
 }

@@ -15,7 +15,7 @@ class AddNombreToProceso extends Migration
     {
         Schema::table('procesos', function (Blueprint $table) {
             $table->string('nombre', 100)->after('id');
-            $table->string('descripcion')->after('nombre');
+            $table->text('descripcion')->after('nombre');
             $table->string('bases')->after('modalidad');
             $table->decimal('preciobase',10,2)->nullable()->after('bases');
         });

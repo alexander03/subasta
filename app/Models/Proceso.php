@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Proceso extends Model
 {
-    use SoftDeletes,HasFactory;
+    use SoftDeletes,HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'nombre',

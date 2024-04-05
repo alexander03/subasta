@@ -58,6 +58,14 @@ class ProcesoController extends Controller
                 Bien::create($input);
             }
         }
+        if (isset($request['image'])) {
+            $obj->clearMediaCollection('images');
+            $obj->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+        if (isset($request['bases'])) {
+            $obj->clearMediaCollection('bases');
+            $obj->addMediaFromRequest('bases')->toMediaCollection('bases');
+        }
         foreach ($etapas as $key => $value) {
             $input = $value;
             $input->proceso_id=$obj->id;
@@ -90,6 +98,14 @@ class ProcesoController extends Controller
     {
         $obj = Proceso::find($id);
         $obj->update($request->all());
+        if (isset($request['image'])) {
+            $obj->clearMediaCollection('images');
+            $obj->addMediaFromRequest('image')->toMediaCollection('images');
+        }
+        if (isset($request['bases'])) {
+            $obj->clearMediaCollection('bases');
+            $obj->addMediaFromRequest('bases')->toMediaCollection('bases');
+        }
         return response()->json($obj);
     }
 
